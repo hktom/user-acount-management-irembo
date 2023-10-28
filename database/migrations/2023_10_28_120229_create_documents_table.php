@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->enum('name', ['PASSPORT', 'NATIONAL_ID'])->nullable();
             $table->string('code')->unique();
-            $table->enum('document_type', ['PASSPORT', 'NATIONAL_ID'])->nullable();
             $table->string('photo')->nullable();
             $table->string('confirmed_at')->nullable();
             $table->softDeletes();
