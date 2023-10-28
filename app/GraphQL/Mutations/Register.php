@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\GraphQL\Mutations;
 
+use App\Helper\Password;
 use App\Helper\Randomize;
 use App\Models\Nationality;
 use App\Models\Session;
@@ -28,6 +29,13 @@ final readonly class Register
         }
 
         $user = new User();
+        $check_password = Password::check($args['password'], $args['confirm_password']);
+        
+        if(!$check_password['ok']){
+            return ["message" => $check_password['message'], "status" => 403];
+        }
+
+        $user->password = bcrypt($args['password']);
         $user->first_name = $args['first_name'];
         $user->last_name = $args['last_name'];
         $user->gender = $args['gender'];
@@ -35,7 +43,6 @@ final readonly class Register
         $user->marital_status = $args['marital_status'];
         $user->email = $args['email'];
         $user->nationality_id = $nationality->id;
-            $user->password = bcrypt($args['password']);
 
         $user->save();
 
