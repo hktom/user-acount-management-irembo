@@ -15,7 +15,7 @@ final readonly class ConfirmDocument
             return ["message" => "You don't have enough permissions to proceed this action", "status" => 403];
         }
 
-        $user = User::find($args['id']);
+        $user = User::find($args['user_id']);
         
         if (!$user) {
             return ["message" => "User not found", "status" => 403];

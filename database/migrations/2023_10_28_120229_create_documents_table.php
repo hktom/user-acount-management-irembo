@@ -16,7 +16,7 @@ return new class extends Migration
             $table->enum('name', ['PASSPORT', 'NATIONAL_ID'])->nullable();
             $table->string('code')->unique();
             $table->string('photo')->nullable();
-            $table->string('confirmed_at')->nullable();
+            $table->timestamp('verified_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

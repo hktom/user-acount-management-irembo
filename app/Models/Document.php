@@ -19,7 +19,7 @@ class Document extends Model
         'code',
         'name',
         'photo',
-        'confirmed_at',
+        'verified_at',
     ];
 
     /**
