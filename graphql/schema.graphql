@@ -8,136 +8,156 @@ scalar Upload
 scalar DateTimeTz
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTimeTz")
 
-
 type Query {
 
-  me: User @auth
+    me: User @auth
 
+    users: [User!]! @auth
+
+    countries: [Nationality] @all @orderBy(column: "name", direction: ASC)
 }
 
 type Mutation {
 
-  login(email: String!, password: String!): Response!
+    login(email: String!, password: String!): Response!
 
-  loginMultiFactor(email: String!, password: String!): Response!
+    loginMultiFactor(email: String!, password: String!): Response!
 
-  register(first_name: String!, last_name: String!, email: String!, password: String!, password_confirmation: String!): Response!
+    register(
+        first_name: String!
+        last_name: String!
+        email: String!
+        password: String!
+        password_confirmation: String!
+        nationality_id: String!
+        gender: Gender!
+        date_of_birth: String!
+        marital_status: MARITAL_STATUS!
+    ): Response!
 
-  forgotPassword(email: String!): Response!
+    forgotPassword(email: String!): Response!
 
-  resetPassword(email: String!, password: String!, password_confirmation: String!, token: String!): Response!
+    resetPassword(
+        email: String!
+        password: String!
+        password_confirmation: String!
+        token: String!
+    ): Response!
 
-  updateProfile(input: userInput! @spread): Response! @auth
+    updateProfile(input: userInput! @spread): Response! @auth
 
-  upgradeProfile(role:Role, status:Status): Response! @auth
+    upgradeProfile(role: Role, status: Status): Response! @auth
 
-  logout: Response! @auth
+    logout: Response! @auth
 
-  postDocument(input: documentInput! @spread): Response! @auth
+    postDocument(input: documentInput! @spread): Response! @auth
 
-  confirmDocument(user_id: String!): Response! @auth
+    confirmDocument(user_id: String!): Response! @auth
 
-  verifyEmail(token: String!): Response! @auth
+    verifyEmail(token: String!): Response! @auth
 
+    upsertCountry(name:String!, code:String!): Nationality @upsert
 }
 
-input userInput{
-
-  first_name: String
-  last_name: String
-  photo: String
-  gender: Gender
-  date_of_birth: String
-  marital_status: MARITAL_STATUS
+input userInput {
+    first_name: String
+    last_name: String
+    photo: String
+    gender: Gender
+    date_of_birth: String
+    marital_status: MARITAL_STATUS
 }
 
+input documentInput {
+    name: String!
+    code: String!
+    photo: String!
+}
 
 type Response {
-  status: String
-  message: String
-  token: String
-  user : User
-  document: Document
-  nationality: Nationality
-  session: Session
+    status: String
+    message: String
+    token: String
+    user: User
+    document: Document
+    nationality: Nationality
+    session: Session
 }
 
-
 type User {
-  id: ID!
-  first_name: String
-  last_name: String
-  email: String
-  email_verified_at: DateTime
-  status: String
-  role: String
-  photo: String
-  date_of_birth: String
-  gender: String
-  document: Document @belongsTo
-  nationality: Nationality @belongsTo
-  sessions: [Session] @hasMany @orderBy(column: "created_at", direction: DESC)
-  created_at: DateTime
-  updated_at: DateTime
+    id: ID!
+    first_name: String
+    last_name: String
+    email: String
+    email_verified_at: DateTime
+    status: String
+    role: String
+    photo: String
+    date_of_birth: String
+    gender: String
+    document: Document @belongsTo
+    nationality: Nationality @belongsTo
+    sessions: [Session] @hasMany @orderBy(column: "created_at", direction: DESC)
+    created_at: DateTime
+    updated_at: DateTime
 }
 
 type Document {
-  id: ID!
-  code: String
-  name: String
-  photo: String
-  verified_at: DateTime
-  users: [User] @hasMany
-  created_at: DateTime
-  updated_at: DateTime
+    id: ID!
+    code: String
+    name: String
+    photo: String
+    verified_at: DateTime
+    users: [User] @hasMany
+    created_at: DateTime
+    updated_at: DateTime
 }
 
 type Nationality {
-  id: ID!
-  name: String
-  code: String
-  flag: String
-  dial_code: String
-  currency: String
-  currency_symbol: String
-  users: [User] @hasMany
-  created_at: DateTime
-  updated_at: DateTime
+    id: ID!
+    name: String
+    code: String
+    flag: String
+    dial_code: String
+    currency: String
+    currency_symbol: String
+    users: [User] @hasMany
+    created_at: DateTime
+    updated_at: DateTime
 }
 
 type Session {
-  id: ID!
-  ip_address: String
-  user_agent: String
-  token: String
-  expires_at: DateTime
-  action: String
-  created_at: DateTime
-  updated_at: DateTime
+    id: ID!
+    ip_address: String
+    user_agent: String
+    token: String
+    expires_at: DateTime
+    action: String
+    created_at: DateTime
+    updated_at: DateTime
 }
 
-enum Role{
-  ADMIN
-  USER
+enum Role {
+    ADMIN
+    USER
 }
 
-enum MARITAL_STATUS{
-  SINGLE
-  MARRIED
-  DIVORCED 
-  WIDOWED
+enum MARITAL_STATUS {
+    SINGLE
+    MARRIED
+    DIVORCED
+    WIDOWED
 }
 
-enum Gender{
-  MAN
-  WOMAN
-  OTHER
+enum Gender {
+    MAN
+    WOMAN
+    OTHER
 }
 
-enum Status{
-  
-  SINGLE
-  MARRIED
-  DIVORCED 
-  WIDOWED
+enum Status {
+    SINGLE
+    MARRIED
+    DIVORCED
+    WIDOWED
 }
