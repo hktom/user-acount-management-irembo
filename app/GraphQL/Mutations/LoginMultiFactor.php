@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\GraphQL\Mutations;
 
-use App\Helper\Randomize;
+use App\Helpers\Randomize;
+use App\Helpers\Email;
 use App\Models\Session;
 use App\Models\User;
 
@@ -34,7 +35,8 @@ final readonly class LoginMultiFactor
         }
 
         if ($token) {
-
+            // delete all the previous token 
+            Session::where('user_id', auth()->user()->id)->where('action', 'MULTI_FACTORS')->delete();
             $multi_factor = Randomize::quickRandom(4);
             $login = new Session();
             $login->user_id = auth()->user()->id;
@@ -42,6 +44,15 @@ final readonly class LoginMultiFactor
             $login->expires_at = date('Y-m-d H:i:s', strtotime('+1 hour'));
             $login->action = "MULTI_FACTORS";
             $login->save();
+
+            Email::sender($args['email'], [
+                'subject' => "Z Multi Factor Authentication",
+                'title' => "Welcome to Z",
+                'content' => "Your multi factor code is $multi_factor",
+                'btn_label' => "Go to login page",
+                'btn_url' => "https://z.com/login",
+                'footer' => "With love from Z"
+            ]);
 
             return ["message" => "We have sent the confirmation to your email", "status" => 200];
         }

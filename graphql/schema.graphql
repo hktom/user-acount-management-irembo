@@ -19,7 +19,7 @@ type Query {
 
 type Mutation {
 
-    login(email: String!, password: String!): Response!
+    login(token:String!): Response!
 
     loginMultiFactor(email: String!, password: String!): Response!
 

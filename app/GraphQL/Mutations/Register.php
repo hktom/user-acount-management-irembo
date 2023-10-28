@@ -64,6 +64,7 @@ final readonly class Register
 
             // send email
             $send_email = Email::sender($args['email'], [
+                'subject' => "Z  Welcome",
                 'title' => "Welcome to Z",
                 'content' => "Please confirm your email address to complete your registration",
                 'btn_label' => "Confirm email",

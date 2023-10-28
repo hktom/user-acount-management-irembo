@@ -34,6 +34,7 @@ final readonly class VerifyEmail
         $session->delete();
 
         Email::sender($user->email, [
+            'subject' => "Z Email Verification",
             'title' => "Welcome to Z",
             'content' => "Your email has been verified, you can now access all features in Z",
             'btn_label' => "Go to login page",

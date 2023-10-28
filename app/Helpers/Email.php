@@ -9,7 +9,7 @@ class Email
     /**
      * Send email
      * @param string $to Email address
-     * @param array $data Email data [title, content, btn_label, btn_url, footer]
+     * @param array $data Email data [subject, title, content, btn_label, btn_url, footer]
      */
     public static function sender(string $to, array $data)
     {
