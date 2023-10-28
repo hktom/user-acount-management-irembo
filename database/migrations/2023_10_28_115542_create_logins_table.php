@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('ip_address')->nullable();
             $table->string('user_agent')->nullable();
             $table->string('token')->nullable();
-            $table->enum('action', ['LOGIN', 'LOGOUT', 'REGISTER', 'RESET_PASSWORD', 'FORGOT_PASSWORD', 'LOGIN_LINK', 'RESET_LINK', 'MULTI_FACTORS', 'LOGIN_ATTEMPT'])->default('LOGIN');
+            $table->enum('action', ['LOGIN', 'LOGOUT', 'REGISTER', 'RESET_PASSWORD', 'FORGOT_PASSWORD', 'LOGIN_LINK', 'RESET_LINK', 'MULTI_FACTORS', 'LOGIN_ATTEMPT', 'CONFIRM_EMAIL'])->default('LOGIN');
             $table->uuid('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('expires_at')->nullable();

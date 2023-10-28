@@ -39,6 +39,7 @@ final readonly class LoginMultiFactor
             $login = new Session();
             $login->user_id = auth()->user()->id;
             $login->token = $multi_factor;
+            $login->expires_at = date('Y-m-d H:i:s', strtotime('+1 hour'));
             $login->action = "MULTI_FACTORS";
             $login->save();
 

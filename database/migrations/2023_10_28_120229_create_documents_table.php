@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('national_id')->nullable();
+            $table->string('national_id')->unique();
             $table->enum('document_type', ['PASSPORT', 'NATIONAL_ID'])->nullable();
             $table->string('photo')->nullable();
             $table->string('document_image')->nullable();

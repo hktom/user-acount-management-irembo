@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('nationalities', function (Blueprint $table) {
-            $table->uuid('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+        Schema::table('users', function (Blueprint $table) {
+            $table->uuid('nationality_id')->nullable();
+            $table->foreign('nationality_id')->references('id')->on('nationalities');
         });
     }
 
