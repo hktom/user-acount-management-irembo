@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('nationality_id')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('photo')->nullable();
@@ -22,8 +21,9 @@ return new class extends Migration
             $table->string('date_of_birth')->nullable();
             $table->enum('marital_status', ['SINGLE', 'MARRIED', 'DIVORCED', 'WIDOWED'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->tinyInteger('email_verified')->default(0);
             $table->string('password');
-            $table->enum('status', ['UNVERIFIED', 'PENDING', 'VERIFICATION', 'VERIFIED'])->default('UNVERIFIED');
+            $table->enum('status', ['UNVERIFIED', 'PENDING', 'VERIFICATION', 'VERIFIED', 'SUSPENDED'])->default('UNVERIFIED');
             $table->enum('role', ['ADMIN', 'USER'])->default('USER');
             $table->softDeletes();
             $table->rememberToken();
