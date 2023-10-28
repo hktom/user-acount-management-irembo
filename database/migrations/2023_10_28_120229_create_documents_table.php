@@ -16,9 +16,7 @@ return new class extends Migration
             $table->string('national_id')->unique();
             $table->enum('document_type', ['PASSPORT', 'NATIONAL_ID'])->nullable();
             $table->string('photo')->nullable();
-            $table->string('document_image')->nullable();
-            $table->uuid('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('confirmed_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
