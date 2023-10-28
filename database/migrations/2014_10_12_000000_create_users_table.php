@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('nationality_id')->nullable();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('photo')->nullable();
             $table->enum('gender', ['MAN', 'WOMAN', 'OTHER'])->nullable();
             $table->string('email')->unique();
             $table->string('date_of_birth')->nullable();
