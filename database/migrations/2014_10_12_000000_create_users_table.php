@@ -12,11 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->uuid('id')->primary();
+            $table->uuid('nationality_id')->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->enum('gender', ['MAN', 'WOMAN', 'OTHER'])->nullable();
             $table->string('email')->unique();
+            $table->string('date_of_birth')->nullable();
+            $table->enum('marital_status', ['SINGLE', 'MARRIED', 'DIVORCED', 'WIDOWED'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('status', ['UNVERIFIED', 'PENDING', 'VERIFICATION', 'VERIFIED'])->default('UNVERIFIED');
             $table->rememberToken();
             $table->timestamps();
         });
