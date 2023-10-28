@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\GraphQL\Mutations;
 
+use App\Helpers\Email;
 use App\Models\Session;
 use App\Models\User;
 
@@ -12,10 +13,11 @@ final readonly class VerifyEmail
     /** @param  array{}  $args */
     public function __invoke(null $_, array $args)
     {
-        if(!auth()->check()) {
+
+        if (!auth()->user()) {
             return ["message" => "Unauthorized", "status" => 401];
         }
-        
+
         $session = Session::where('token', $args['token'])->where('action', 'CONFIRM_EMAIL')->first();
         if (!$session) {
             return ["message" => "Token not found or expired", "status" => 403];
@@ -30,6 +32,14 @@ final readonly class VerifyEmail
         $user->save();
 
         $session->delete();
+
+        Email::sender($user->email, [
+            'title' => "Welcome to Z",
+            'content' => "Your email has been verified, you can now access all features in Z",
+            'btn_label' => "Go to login page",
+            'btn_url' => "https://z.com/login",
+            'footer' => "With love from Z"
+        ]);
 
         // send email 
 

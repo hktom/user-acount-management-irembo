@@ -44,17 +44,17 @@ type Mutation {
         token: String!
     ): Response!
 
-    updateProfile(input: userInput! @spread): Response! @auth
+    updateProfile(input: userInput! @spread): Response! @auth @guard
 
-    upgradeProfile(role: Role, status: Status): Response! @auth
+    upgradeProfile(role: Role, status: Status): Response! @auth @guard
 
-    logout: Response! @auth
+    logout: Response @auth
 
-    postDocument(input: documentInput! @spread): Response! @auth
+    postDocument(input: documentInput! @spread): Response! @auth @guard
 
-    confirmDocument(user_id: String!): Response! @auth
+    confirmDocument(user_id: String!): Response! @auth @guard
 
-    verifyEmail(token: String!): Response! @auth
+    verifyEmail(token: String!): Response! @auth @guard
 
     upsertCountry(name:String!, code:String!): Nationality @upsert
 }
