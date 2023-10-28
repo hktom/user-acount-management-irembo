@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('dial_code')->nullable();
             $table->string('currency')->nullable();
             $table->string('currency_symbol')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
         

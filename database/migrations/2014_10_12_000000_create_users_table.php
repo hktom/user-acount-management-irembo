@@ -23,6 +23,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('status', ['UNVERIFIED', 'PENDING', 'VERIFICATION', 'VERIFIED'])->default('UNVERIFIED');
+            $table->enum('role', ['ADMIN', 'USER'])->default('USER');
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });
