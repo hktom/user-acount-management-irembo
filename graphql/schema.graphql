@@ -94,7 +94,8 @@ type User {
     role: String
     photo: String
     date_of_birth: String
-    gender: String
+    gender: Gender
+    marital_status: MARITAL_STATUS
     document: Document @belongsTo
     nationality: Nationality @belongsTo
     sessions: [Session] @hasMany @orderBy(column: "created_at", direction: DESC)
