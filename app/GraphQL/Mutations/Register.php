@@ -23,27 +23,26 @@ final readonly class Register
             return ["message" => "Email already registered", "status" => 403];
         }
 
-        $user = new User();
         $check_password = Password::check($args['password'], $args['password_confirmation']);
 
         if (!$check_password['ok']) {
             return ["message" => $check_password['message'], "status" => 403];
         }
 
-        $nationality = Nationality::find($args['nationality_id']);
+        // $nationality = Nationality::find($args['nationality_id']);
 
-        if (!$nationality) {
-            return ["message" => "This country is not open yet", "status" => 403];
-        }
-
+        // if (!$nationality) {
+        //     return ["message" => "This country is not open yet", "status" => 403];
+        // }
+        $user = new User();
         $user->password = bcrypt($args['password']);
         $user->first_name = $args['first_name'];
         $user->last_name = $args['last_name'];
-        $user->gender = $args['gender'];
-        $user->date_of_birth = $args['date_of_birth'];
-        $user->marital_status = $args['marital_status'];
         $user->email = $args['email'];
-        $user->nationality_id = $nationality->id;
+        // $user->gender = $args['gender'];
+        // $user->marital_status = $args['marital_status'];
+        // $user->date_of_birth = $args['date_of_birth'];
+        // $user->nationality_id = $nationality->id;
 
         $user->save();
 

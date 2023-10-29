@@ -29,10 +29,10 @@ type Mutation {
         email: String!
         password: String!
         password_confirmation: String!
-        nationality_id: String!
-        gender: Gender!
-        date_of_birth: String!
-        marital_status: MARITAL_STATUS!
+        # nationality_id: String!
+        # gender: Gender!
+        # date_of_birth: String!
+        # marital_status: MARITAL_STATUS!
     ): Response!
 
     forgotPassword(email: String!): Response!
@@ -52,7 +52,7 @@ type Mutation {
 
     postDocument(input: documentInput! @spread): Response! @auth @guard
 
-    confirmDocument(user_id: String!): Response! @auth @guard
+    confirmDocument(user_id: String!, status: Status!): Response! @auth @guard
 
     verifyEmail(token: String!): Response! @auth @guard
 
@@ -156,8 +156,7 @@ enum Gender {
 }
 
 enum Status {
-    SINGLE
-    MARRIED
-    DIVORCED
-    WIDOWED
+    UNVERIFIED 
+    PENDING VERIFICATION
+    VERIFIED
 }
