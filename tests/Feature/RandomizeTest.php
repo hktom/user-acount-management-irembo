@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Helpers\Randomize;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -13,8 +14,7 @@ class RandomizeTest extends TestCase
      */
     public function test_example(): void
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $randomize = Randomize::quickRandom(10, true);
+        $this->assertEquals(10, strlen($randomize));
     }
 }
