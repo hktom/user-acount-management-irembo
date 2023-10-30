@@ -48,9 +48,9 @@ final readonly class LoginMultiFactor
             Email::sender($args['email'], [
                 'subject' => "Z Multi Factor Authentication",
                 'title' => "Welcome to Z",
-                'content' => "Your multi factor code is $multi_factor",
-                'btn_label' => "Go to login page",
-                'btn_url' => env('CLIENT_URL')."/auth/login?token=$multi_factor",
+                'content' => "Your multi factor code is $multi_factor. It will expire in 1 hour.",
+                'btn_label' => "Login to Z",
+                'btn_url' => env('CLIENT_URL')."/web-hook?action=magic_link&token=$multi_factor&email={$args['email']}",
                 'footer' => "With love from Z"
             ]);
 

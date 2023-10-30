@@ -14,16 +14,20 @@ final readonly class Login
     {
         $multi_factor = $args['token'];
 
-        $login = Session::where('token', $multi_factor)->where('action', 'MULTI_FACTORS')->where('expires_at', '>=', date('Y-m-d H:i:s'))->first();
+        $user = User::where('email', $args['email'])->first();
+
+        if (!$user) {
+            return ["message" => "Email not found", "status" => 403];
+        }
+
+        $login = Session::where('token', $multi_factor)
+        ->where('action', 'MULTI_FACTORS')
+        ->where('user_id', $user->id)
+        ->where('expires_at', '>=', date('Y-m-d H:i:s'))
+        ->first();
 
         if (!$login) {
             return ["message" => "Token not found", "status" => 403];
-        }
-
-        $user = User::find($login->user_id);
-
-        if (!$user) {
-            return ["message" => "User not found", "status" => 403];
         }
 
         $token = auth()->login($user);

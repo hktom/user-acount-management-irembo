@@ -17,7 +17,9 @@ type Query {
 }
 
 type Mutation {
-    login(token: String!): Response!
+    login(token: String!, email:String!): Response!
+
+    loginLink(email: String!): Response!
 
     loginMultiFactor(email: String!, password: String!): Response!
 
