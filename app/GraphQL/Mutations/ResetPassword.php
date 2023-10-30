@@ -11,7 +11,8 @@ final readonly class ResetPassword
     /** @param  array{}  $args */
     public function __invoke(null $_, array $args)
     {
-        $user = User::find($args['email']);
+        $user = User::where('email', $args['email'])->first();
+        
         if(!$user){
             return ["message" => "Email not found", "status" => 403];
         }

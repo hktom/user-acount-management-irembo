@@ -12,7 +12,7 @@ final readonly class ForgotPassword
     /** @param  array{}  $args */
     public function __invoke(null $_, array $args)
     {
-        $user = User::find($args['email']);
+        $user = User::where('email', $args['email'])->first();
         if(!$user){
             return ["message" => "Email not found", "status" => 403];
         }
@@ -30,7 +30,7 @@ final readonly class ForgotPassword
             'title' => "Z Authentication reset password",
             'content' => "We received a request to reset your password for your account with [Your Company Name]. To complete the password reset process, please follow the instructions below. If you didn't request a password reset, or if you believe this request was made in error, please disregard this email. Your account remains secure. It will expire in 1 hour.",
             'btn_label' => "Reset Password",
-            'btn_url' => env('CLIENT_URL')."/auth/reset_password?action=magic_link&token=$token&email={$args['email']}",
+            'btn_url' => env('CLIENT_URL')."/auth/reset-password?token=$token&email={$args['email']}",
             'footer' => "With love from Z"
         ]);
 
