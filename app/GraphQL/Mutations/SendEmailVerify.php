@@ -66,7 +66,7 @@ final readonly class SendEmailVerify
                         
             ",
             'btn_label' => "Confirm email",
-            'btn_url' => env('CLIENT_URL') . "/hook?action=verify_email&token={$random}&email={$user->email}",
+            'btn_url' => env('CLIENT_URL') . "/web-hook?action=verify_email&token={$random}&email={$user->email}",
             'footer' => "With love from Z"
         ]);
 
