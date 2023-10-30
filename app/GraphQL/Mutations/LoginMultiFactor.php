@@ -50,7 +50,7 @@ final readonly class LoginMultiFactor
                 'title' => "Welcome to Z",
                 'content' => "Your multi factor code is $multi_factor",
                 'btn_label' => "Go to login page",
-                'btn_url' => "https://z.com/login",
+                'btn_url' => env('CLIENT_URL')."/auth/login?token=$multi_factor",
                 'footer' => "With love from Z"
             ]);
 

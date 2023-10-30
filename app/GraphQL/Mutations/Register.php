@@ -67,7 +67,7 @@ final readonly class Register
                 'title' => "Welcome to Z",
                 'content' => "Please confirm your email address to complete your registration",
                 'btn_label' => "Confirm email",
-                'btn_url' => env('APP_URL') . "/confirm-email?token={$random}&email={$args['email']}",
+                'btn_url' => env('CLIENT_URL') . "/confirm-email?token={$random}&email={$args['email']}",
                 'footer' => "With love from Z"
             ]);
 

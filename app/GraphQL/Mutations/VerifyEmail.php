@@ -37,8 +37,8 @@ final readonly class VerifyEmail
             'subject' => "Z Email Verification",
             'title' => "Welcome to Z",
             'content' => "Your email has been verified, you can now access all features in Z",
-            'btn_label' => "Go to login page",
-            'btn_url' => "https://z.com/login",
+            'btn_label' => "Go to Z",
+            'btn_url' => env('CLIENT_URL'),
             'footer' => "With love from Z"
         ]);
 
