@@ -47,8 +47,8 @@ final readonly class Register
                 'subject' => "Welcome to Z",
                 'title' => "Welcome to Z",
                 'content' => "we're committed to bringing you the most advanced and convenient payment solutions tailored for the African continent. We understand that Africa is a diverse and dynamic landscape with unique challenges, and we're here to address them head-on.",
-                'btn_label' => "Go to Z",
-                'btn_url' => env('CLIENT_URL'),
+                'btn_label' => "Confirm email",
+                'btn_url' => env('CLIENT_URL') . "/web-hook?action=verify_email&token={$token}&email={$user->email}",
                 'footer' => "With love from Z"
             ]);
 
