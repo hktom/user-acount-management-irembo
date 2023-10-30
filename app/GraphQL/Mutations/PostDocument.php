@@ -6,6 +6,7 @@ namespace App\GraphQL\Mutations;
 
 use App\Models\Document;
 use App\Models\User;
+use App\Helpers\Email;
 
 final readonly class PostDocument
 {
@@ -37,6 +38,14 @@ final readonly class PostDocument
         $user->save();
 
         // send email
+        Email::sender($user->email, [
+            'subject' => "Z  Identity Verification",
+            'title' => "Identity Verification",
+            'content' => "Thanks for submitting your document. We will verify it and get back to you soon. If you have any questions or need assistance during the verification process, please don't hesitate to reach out to our support team. <br/> Thank you for helping us maintain a secure and trustworthy community. We appreciate your cooperation in this important process.",
+            'btn_label' => "Go to Z",
+            'btn_url' => env('CLIENT_URL'),
+            'footer' => "With love from Z"
+        ]);
 
         return ["message" => "Your document verification has been sent. Your account is now in PENDING VERIFICATION. We have sent you an email with all details", "status" => 200, 'user' => $user];
     }
