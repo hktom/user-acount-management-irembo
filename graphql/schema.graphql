@@ -33,6 +33,8 @@ type Mutation {
     # marital_status: MARITAL_STATUS!
     Response!
 
+    sendEmailVerify : Response! @guard
+
     forgotPassword(email: String!): Response!
 
     resetPassword(
@@ -41,6 +43,8 @@ type Mutation {
         password_confirmation: String!
         token: String!
     ): Response!
+
+    updatePassword(password:String!, new_password:String!,password_confirmation:String!) : Response! @guard
 
     updateProfile(input: userInput! @spread): Response! @guard
 

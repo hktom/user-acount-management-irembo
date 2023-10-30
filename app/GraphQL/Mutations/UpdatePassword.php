@@ -34,6 +34,6 @@ final readonly class UpdatePassword
 
         $user->save();
 
-        return ["message" => "Password updated", "status" => 200];
+        return ["message" => "Your password has be updated", "status" => 200];
     }
 }

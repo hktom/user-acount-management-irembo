@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\GraphQL\Mutations;
 
 use App\Helpers\Password;
-use App\Helpers\Randomize;
-use App\Helpers\Email;
 use App\Models\Nationality;
 use App\Models\Session;
 use App\Models\User;
+use App\Helpers\Email;
 
 final readonly class Register
 {
@@ -54,22 +53,17 @@ final readonly class Register
             $login->action = "REGISTER";
             $login->save();
 
-            $random = Randomize::quickRandom(54);
-            $login = new Session();
-            $login->token = $random;
-            $login->user_id = auth()->user()->id;
-            $login->action = "CONFIRM_EMAIL";
-            $login->save();
-
-            // send email
-            $send_email = Email::sender($args['email'], [
-                'subject' => "Z  Welcome",
+            Email::sender($user->email, [
+                'subject' => "Welcome to Z",
                 'title' => "Welcome to Z",
-                'content' => "Please confirm your email address to complete your registration",
-                'btn_label' => "Confirm email",
-                'btn_url' => env('CLIENT_URL') . "/confirm-email?token={$random}&email={$args['email']}",
+                'content' => "we're committed to bringing you the most advanced and convenient payment solutions tailored for the African continent. We understand that Africa is a diverse and dynamic landscape with unique challenges, and we're here to address them head-on.",
+                'btn_label' => "Go to Z",
+                'btn_url' => env('CLIENT_URL'),
                 'footer' => "With love from Z"
             ]);
+
+            // send email verify
+            new SendEmailVerify($_, $args);
 
             return ["message" => "We have sent an email confirmation link", "status" => 200, "token" => $token];
         }
