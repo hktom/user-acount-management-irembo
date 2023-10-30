@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@adminz.com',
             'password' => bcrypt('Admin@1234510'),
             'role' => "ADMIN",
+            'created_at' => now(),
         ]);
     }
 }
