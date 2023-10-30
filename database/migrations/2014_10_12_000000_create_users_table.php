@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('marital_status', ['SINGLE', 'MARRIED', 'DIVORCED', 'WIDOWED'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('status', ['UNVERIFIED', 'PENDING', 'VERIFICATION', 'VERIFIED', 'SUSPENDED'])->default('UNVERIFIED');
+            $table->enum('status', ['UNVERIFIED', 'PENDING VERIFICATION', 'VERIFIED', 'SUSPENDED'])->default('UNVERIFIED');
             $table->enum('role', ['ADMIN', 'USER'])->default('USER');
             $table->softDeletes();
             $table->rememberToken();

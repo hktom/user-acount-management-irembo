@@ -9,7 +9,6 @@ scalar DateTimeTz
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTimeTz")
 
 type Query {
-
     me: User @auth
 
     users: [User!]! @auth
@@ -18,8 +17,7 @@ type Query {
 }
 
 type Mutation {
-
-    login(token:String!): Response!
+    login(token: String!): Response!
 
     loginMultiFactor(email: String!, password: String!): Response!
 
@@ -29,11 +27,11 @@ type Mutation {
         email: String!
         password: String!
         password_confirmation: String!
-        # nationality_id: String!
-        # gender: Gender!
-        # date_of_birth: String!
-        # marital_status: MARITAL_STATUS!
-    ): Response!
+    ): # nationality_id: String!
+    # gender: Gender!
+    # date_of_birth: String!
+    # marital_status: MARITAL_STATUS!
+    Response!
 
     forgotPassword(email: String!): Response!
 
@@ -56,7 +54,7 @@ type Mutation {
 
     verifyEmail(token: String!): Response! @guard
 
-    upsertCountry(name:String!, code:String!): Nationality @upsert
+    upsertCountry(name: String!, code: String!): Nationality @upsert
 }
 
 input userInput {
@@ -69,7 +67,7 @@ input userInput {
 }
 
 input documentInput {
-    name: String!
+    name: DOCUMENT_NAME!
     code: String!
     photo: String!
 }
@@ -106,7 +104,7 @@ type User {
 type Document {
     id: ID!
     code: String
-    name: String
+    name: DOCUMENT_NAME
     photo: String
     verified_at: DateTime
     users: [User] @hasMany
@@ -157,7 +155,13 @@ enum Gender {
 }
 
 enum Status {
-    UNVERIFIED 
-    PENDING VERIFICATION
+    UNVERIFIED
+    PENDING_VERIFICATION @enum(value: "PENDING VERIFICATION")
+    VERIFICATION
     VERIFIED
+}
+
+enum DOCUMENT_NAME {
+    PASSPORT
+    NATIONAL_ID
 }

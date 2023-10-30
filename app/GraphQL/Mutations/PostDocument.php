@@ -17,21 +17,27 @@ final readonly class PostDocument
         if (!$user) {
             return ["message" => "User not found", "status" => 403];
         }
+        // delete current document 
+        $document = $user->document;
+        if ($document) {
+            $document->delete();
+        }
 
-        $user = User::find($args['id']);
-
+        if (Document::where('code', $args['code'])->exists()) {
+            return ["message" => "You are trying to submit another one document ID. This is fraud.", "status" => 403];
+        }
         $document = new Document();
-        $document->national_id = $args['national_id'];
-        $document->document_type = $args['document_type'];
+        $document->code = $args['code'];
+        $document->name = $args['name'];
         $document->photo = $args['photo'];
         $document->save();
 
-        $user->status = 'PENDING';
+        $user->document_id = $document->id;
+        $user->status = "PENDING VERIFICATION";
         $user->save();
 
         // send email
 
-        return ["message" => "Document has been posted", "status" => 200, 'data' => $user];
-
+        return ["message" => "Your document verification has been sent. Your account is now in PENDING VERIFICATION. We have sent you an email with all details", "status" => 200, 'user' => $user];
     }
 }
