@@ -28,6 +28,11 @@ are:
 9. Execute migrations: docker-compose exec app php artisan jwt:secret
 10. Access the application via http://localhost:8000
 
+#### Already installed 
+
+1. Execute: docker-compose up -d
+2. Execute: docker-compose down
+
 #### Install with Makefile
 
 1. Clone this repository : git clone https://github.com/hktom/user-acount-management-irembo.git
