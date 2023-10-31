@@ -8,6 +8,7 @@ use App\Helpers\Password;
 use App\Models\Session;
 use App\Models\User;
 use App\Helpers\Email;
+use App\Helpers\Randomize;
 
 final readonly class Register
 {
@@ -43,12 +44,21 @@ final readonly class Register
             $login->action = "REGISTER";
             $login->save();
 
+            $random = Randomize::quickRandom(54);
+
+            $login = new Session();
+            $login->token = $random;
+            $login->user_id = $user->id;
+            $login->action = "CONFIRM_EMAIL";
+            $login->expires_at = date('Y-m-d H:i:s', strtotime('+1 day'));
+            $login->save();
+
             Email::sender($user->email, [
                 'subject' => "Welcome to Z",
                 'title' => "Welcome to Z",
                 'content' => "we're committed to bringing you the most advanced and convenient payment solutions tailored for the African continent. We understand that Africa is a diverse and dynamic landscape with unique challenges, and we're here to address them head-on.",
                 'btn_label' => "Confirm email",
-                'btn_url' => env('CLIENT_URL') . "/web-hook?action=verify_email&token={$token}&email={$user->email}",
+                'btn_url' => env('CLIENT_URL') . "/web-hook?action=verify_email&token={$random}&email={$user->email}",
                 'footer' => "With love from Z"
             ]);
 
