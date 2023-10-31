@@ -47,3 +47,7 @@ are:
 #### In seeding we create an admin user, if you want to change his email value you can do it in the .env file
 
 1. **ADMIN_MAIL="your admin mail"**
+
+### Testing
+
+1. Execute: docker-compose exec app php artisan test
