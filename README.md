@@ -38,9 +38,10 @@ are:
 
 #### For you to send email you need to configure a Sengrid API KEY and Complete your env with the following
 
-**(SENDGRID_API_KEY=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)**
-**(MAILER_NAME = "Your email sender name")**
-**(EMAIL_SENDER="your sendgrid API email ")**
+1. **SENDGRID_API_KEY=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**
+2. **MAILER_NAME = "Your email sender name"**
+3. **EMAIL_SENDER="your sendgrid API email "**
 
 #### In seeding we create an admin user, if you want to change his email value you can do it in the .env file
-**(ADMIN_MAIL="your admin mail")**
+
+**ADMIN_MAIL="your admin mail"**
