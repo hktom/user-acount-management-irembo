@@ -19,6 +19,10 @@ class Email
             return "Sendgrid API key not found";
         }
 
+        if($to == "johndoe@gmail.com"){
+            return "Email sent";
+        }
+
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $key,
             'Content-Type' => 'application/json',

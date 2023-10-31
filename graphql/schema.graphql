@@ -11,7 +11,7 @@ scalar DateTimeTz
 type Query {
     me: User @auth
 
-    users: [User!]! @auth
+    users: [User!]! @all @guard @canAccess(requiredRole: "ADMIN")
 
     countries: [Nationality] @all @orderBy(column: "name", direction: ASC)
 }
@@ -50,7 +50,7 @@ type Mutation {
 
     updateProfile(input: userInput! @spread): Response! @guard
 
-    upgradeProfile(role: Role, status: Status): Response! @guard
+    upgradeProfile(role: Role, status: Status): Response! @guard @canAccess(requiredRole: "ADMIN")
 
     logout: Response @guard
 
@@ -83,6 +83,7 @@ type Response {
     message: String
     token: String
     user: User
+    users: [User]
     document: Document
     nationality: Nationality
     session: Session
