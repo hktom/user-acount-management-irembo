@@ -1,4 +1,4 @@
-FROM php:8.2.1-fpm
+FROM php:8.2.10-fpm
 
 RUN apt-get clean && apt-get update && apt-get install -y  \
     libmagickwand-dev \
