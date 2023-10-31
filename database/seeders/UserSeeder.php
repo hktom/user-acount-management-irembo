@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,12 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $user = User::where('role', 'ADMIN')->first();
+        
+        if ($user) {
+            return;
+        }
+
         DB::table('users')->insert([
             "id" => Uuid::uuid4(),
             'first_name' => 'Irembo',

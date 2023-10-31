@@ -23,10 +23,15 @@ are:
 4. Execute: docker-compose up -d --build **(if you have docker installed)**
 5. Execute: docker-compose exec app composer install
 6. Execute migrations: docker-compose exec app php artisan migrate
-7. Execute migrations: docker-compose exec app php artisan db:seed
-8. Execute migrations: docker-compose exec app php artisan key:generate
-9. Execute migrations: docker-compose exec app php artisan jwt:secret
+7. Execute migrations: docker-compose exec app php artisan key:generate
+8. Execute migrations: docker-compose exec app php artisan jwt:secret
+9. Execute migrations: docker-compose exec app php artisan db:seed
 10. Access the application via http://localhost:8000
+
+#### Already installed 
+
+1. Execute: docker-compose up -d
+2. Execute: docker-compose down
 
 #### Install with Makefile
 
@@ -47,3 +52,7 @@ are:
 #### In seeding we create an admin user, if you want to change his email value you can do it in the .env file
 
 1. **ADMIN_MAIL="your admin mail"**
+
+### Testing
+
+1. Execute: docker-compose exec app php artisan test
