@@ -83,6 +83,7 @@ type Response {
     message: String
     token: String
     user: User
+    users: [User]
     document: Document
     nationality: Nationality
     session: Session
