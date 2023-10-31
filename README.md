@@ -6,10 +6,10 @@ Company Z is going through stages of growth and adding 1000’s of users daily -
 millions of transactions per month. One of the key features of the platform that need improvement
 are:
 
-● Ease the on-boarding process of new users.
-● Highly available and performant application to handle 1000’s of requests simultaneously.
-● Store and manage user data at orders of magnitude of scale.
-● Implement best in class security features.
+1. ● Ease the on-boarding process of new users.
+2. ● Highly available and performant application to handle 1000’s of requests simultaneously.
+3. ● Store and manage user data at orders of magnitude of scale.
+4. ● Implement best in class security features.
 
 <img src="https://res.cloudinary.com/diaylgu7a/image/upload/v1698736817/Screenshot_2023-10-31_at_08.20.01_m4kz18.png">
 
@@ -24,7 +24,9 @@ are:
 5. Execute: docker-compose exec app composer install
 6. Execute migrations: docker-compose exec app php artisan migrate
 7. Execute migrations: docker-compose exec app php artisan db:seed
-8. Access the application via http://localhost:8000
+8. Execute migrations: docker-compose exec app php artisan key:generate
+9. Execute migrations: docker-compose exec app php artisan jwt:secret
+10. Access the application via http://localhost:8000
 
 #### Install with Makefile
 
@@ -44,4 +46,4 @@ are:
 
 #### In seeding we create an admin user, if you want to change his email value you can do it in the .env file
 
-**ADMIN_MAIL="your admin mail"**
+1. **ADMIN_MAIL="your admin mail"**
