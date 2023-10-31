@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Nationality;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,11 @@ class NationalitySeeder extends Seeder
      */
     public function run(): void
     {
+        $nationalities = Nationality::all();
+        if ($nationalities->count() > 0) {
+            return;
+        }
+
         DB::table('nationalities')->insert([
             "id" => Uuid::uuid4(),
             'name' => 'Rwanda',
