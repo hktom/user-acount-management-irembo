@@ -36,7 +36,7 @@ class Email
                 ]
             ],
             'from' => [
-                'email' => 'Irembo <'.env('EMAIL_SENDER').'>'
+                'email' => ''.env('MAILER_NAME').' <'.env('EMAIL_SENDER').'>'
             ],
             'template_id' => "d-31e2b697f8834e6f8563ca7b6ce472ee",
         ]);
