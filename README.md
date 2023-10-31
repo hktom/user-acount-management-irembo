@@ -38,7 +38,7 @@ are:
 
 #### For you to send email you need to configure a Sengrid API KEY and Complete your env with the following
 
-1. **SENDGRID_API_KEY=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**
+1. **SENDGRID_API_KEY="your sengrid API KEY"**
 2. **MAILER_NAME = "Your email sender name"**
 3. **EMAIL_SENDER="your sendgrid API email "**
 
