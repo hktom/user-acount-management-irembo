@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\GraphQL\Mutations;
 
+use App\Models\Nationality;
 use App\Models\User;
 
 final readonly class UpdateProfile
@@ -19,8 +20,15 @@ final readonly class UpdateProfile
 
         foreach ($args as $key => $value) {
 
-            if(isset($args[$key]) && $args[$key] != "undefined" && $key != "nationality") {
+            if (isset($args[$key]) && $args[$key] != "undefined" && $key != "nationality_id") {
                 $user->$key = $args[$key];
+            }
+
+            if (isset($args['nationality_id'])) {
+                $nationality = Nationality::find($args['nationality_id']);
+                if ($nationality) {
+                    $user->nationality_id = $nationality->id;
+                }
             }
         }
 

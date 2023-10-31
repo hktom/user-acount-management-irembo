@@ -70,6 +70,7 @@ input userInput {
     gender: Gender
     date_of_birth: String
     marital_status: MARITAL_STATUS
+    nationality_id: String
 }
 
 input documentInput {
